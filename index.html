@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="description" content="Professional app for managing chemical and flavor sample registration with Google Sheets integration">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CRegister">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_192,h_192/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MixoPTE5Mi9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ==&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__">
     <title>Chemical & Flavor Receiving Register</title>
     <style>
         * {
@@ -745,43 +752,48 @@
             syncBtn.innerHTML = '⏳ Syncing...';
             syncBtn.disabled = true;
 
-            fetch(scriptUrl + '?action=getAll')
-                .then(response => response.json())
-                .then(result => {
-                    if (result.success && result.entries) {
-                        data = result.entries.map(entry => ({
-                            id: entry.id,
-                            date: entry.date,
-                            sample: entry.sample,
-                            code: entry.code,
-                            supplier: entry.supplier,
-                            qty: entry.qty,
-                            itemType: entry.itemType,
-                            app: entry.app,
-                            remarks: entry.remarks
-                        }));
-                        saveData();
-                        renderTable();
-                        syncBtn.innerHTML = '✓ Synced!';
-                        syncBtn.style.background = '#4CAF50';
-                        showNotification('Data synced from Google Sheets!', 'success');
-                        setTimeout(() => {
-                            syncBtn.innerHTML = originalText;
-                            syncBtn.style.background = '';
-                            syncBtn.disabled = false;
-                        }, 2000);
-                    } else {
-                        showNotification('Sync failed: ' + (result.message || 'Unknown error'), 'error');
-                        syncBtn.innerHTML = originalText;
-                        syncBtn.disabled = false;
-                    }
+            fetch(scriptUrl, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'getAll'
                 })
-                .catch(error => {
-                    console.error('Sync error:', error);
-                    showNotification('Sync error: ' + error.message, 'error');
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success && result.entries) {
+                    data = result.entries.map(entry => ({
+                        id: entry.id,
+                        date: entry.date,
+                        sample: entry.sample,
+                        code: entry.code,
+                        supplier: entry.supplier,
+                        qty: entry.qty,
+                        itemType: entry.itemType,
+                        app: entry.app,
+                        remarks: entry.remarks
+                    }));
+                    saveData();
+                    renderTable();
+                    syncBtn.innerHTML = '✓ Synced!';
+                    syncBtn.style.background = '#4CAF50';
+                    showNotification('Data synced from Google Sheets! (' + data.length + ' entries)', 'success');
+                    setTimeout(() => {
+                        syncBtn.innerHTML = originalText;
+                        syncBtn.style.background = '';
+                        syncBtn.disabled = false;
+                    }, 2000);
+                } else {
+                    showNotification('No data found or sync failed', 'error');
                     syncBtn.innerHTML = originalText;
                     syncBtn.disabled = false;
-                });
+                }
+            })
+            .catch(error => {
+                console.error('Sync error:', error);
+                showNotification('Sync error: ' + error.message + '. Check URL and try again.', 'error');
+                syncBtn.innerHTML = originalText;
+                syncBtn.disabled = false;
+            });
         }
 
         function reloadData() {
@@ -802,6 +814,25 @@
         window.addEventListener('click', function(e) {
             const modal = document.getElementById('setupModal');
             if (e.target === modal) closeSetup();
+        });
+
+        // Register Service Worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered:', registration);
+                })
+                .catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
+
+        // Handle install prompt for Android
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('Install prompt available');
         });
 
         renderTable();
