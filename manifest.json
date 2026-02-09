@@ -1,7 +1,7 @@
 {
   "name": "Chemical & Flavor Receiving Register",
   "short_name": "CRegister",
-  "description": "A professional app for managing chemical and flavor sample registration with Google Sheets integration",
+  "description": "Professional chemical and flavor sample registration app with Google Sheets integration",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -10,54 +10,40 @@
   "theme_color": "#2196F3",
   "icons": [
     {
-      "src": "https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_192,h_192/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__",
+      "src": "./icon-192.png",
       "sizes": "192x192",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_512,h_512/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzUxMixoPTUxMi9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ==&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__",
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["productivity", "utilities"],
+  "categories": ["productivity"],
   "screenshots": [
     {
-      "src": "https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_540,h_720/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzU0MCxoPTcyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ==&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__",
-      "sizes": "540x720",
-      "type": "image/webp",
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "form_factor": "narrow"
     }
   ],
   "shortcuts": [
     {
       "name": "Add Entry",
-      "short_name": "Add Entry",
-      "description": "Quickly add a new chemical sample entry",
-      "url": "./index.html?action=add",
+      "short_name": "Add",
+      "description": "Add new chemical sample",
+      "url": "./index.html",
       "icons": [
         {
-          "src": "https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_96,h_96/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3Xzk2LGhfOTYvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0=&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__",
-          "sizes": "96x96",
-          "type": "image/webp"
-        }
-      ]
-    },
-    {
-      "name": "View Data",
-      "short_name": "View Data",
-      "description": "View all registered chemical samples",
-      "url": "./index.html?action=view",
-      "icons": [
-        {
-          "src": "https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_96,h_96/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3Xzk2LGhfOTYvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0=&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__",
-          "sizes": "96x96",
-          "type": "image/webp"
+          "src": "./icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     }
-  ],
-  "prefer_related_applications": false
+  ]
 }
