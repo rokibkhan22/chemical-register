@@ -484,6 +484,7 @@
                     <textarea id="remarks" placeholder="Notes..."></textarea>
                 </div>
                 <button type="submit" class="form-btn">Add Stock</button>
+            <button type="button" class="form-btn" style="background: #999; margin-top: 8px; display: none;" id="cancelBtn" onclick="cancelEdit()">Cancel</button>
             </form>
         </div>
 
@@ -543,8 +544,9 @@
         document.getElementById('entryForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const editId = this.dataset.editId;
             const entry = {
-                id: Date.now(),
+                id: editId ? parseInt(editId) : Date.now(),
                 date: document.getElementById('date').value,
                 sample: document.getElementById('sample').value,
                 code: document.getElementById('code').value,
@@ -555,22 +557,48 @@
                 remarks: document.getElementById('remarks').value
             };
 
-            data.push(entry);
+            if (editId) {
+                // Update existing entry
+                const index = data.findIndex(e => e.id === parseInt(editId));
+                if (index !== -1) {
+                    data[index] = entry;
+                    showNotification('Entry updated!', 'success');
+                    
+                    // Sync to Google Sheets
+                    const scriptUrl = localStorage.getItem('googleScriptUrl');
+                    if (scriptUrl) {
+                        fetch(scriptUrl, {
+                            method: 'POST',
+                            body: JSON.stringify({ action: 'update', entry: entry })
+                        }).catch(err => console.log('Sync note:', err));
+                    }
+                }
+            } else {
+                // Add new entry
+                data.push(entry);
+                showNotification('Entry added!', 'success');
+                
+                // Sync to Google Sheets
+                const scriptUrl = localStorage.getItem('googleScriptUrl');
+                if (scriptUrl) {
+                    fetch(scriptUrl, {
+                        method: 'POST',
+                        body: JSON.stringify({ action: 'add', entry: entry })
+                    }).catch(err => console.log('Sync note:', err));
+                }
+            }
+
             saveData();
             renderTable();
             
-            // Sync to Google Sheets
-            const scriptUrl = localStorage.getItem('googleScriptUrl');
-            if (scriptUrl) {
-                fetch(scriptUrl, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'add', entry: entry })
-                }).catch(err => console.log('Sync note:', err));
-            }
-            
+            // Reset form
             this.reset();
+            this.dataset.editId = '';
+            const btn = document.querySelector('.form-btn');
+            const title = document.querySelector('.form-title');
+            btn.textContent = 'Add Stock';
+            title.textContent = '+ Add Entry';
             document.getElementById('date').valueAsDate = new Date();
-            showNotification('Entry added!', 'success');
         });
 
         // Search
@@ -634,7 +662,30 @@
         }
 
         function editEntry(id) {
-            showNotification('Edit coming soon!', 'error');
+            const entry = data.find(e => e.id === id);
+            if (!entry) return;
+
+            // Populate form with existing data
+            document.getElementById('date').value = entry.date;
+            document.getElementById('sample').value = entry.sample || '';
+            document.getElementById('code').value = entry.code;
+            document.getElementById('supplier').value = entry.supplier;
+            document.getElementById('qty').value = entry.qty;
+            document.getElementById('type').value = entry.itemType;
+            document.getElementById('app').value = entry.app || '';
+            document.getElementById('remarks').value = entry.remarks || '';
+
+            // Change button text and form title
+            const btn = document.querySelector('.form-btn');
+            const title = document.querySelector('.form-title');
+            btn.textContent = 'Update Entry';
+            title.textContent = '✏️ Edit Entry';
+
+            // Store edit ID
+            document.getElementById('entryForm').dataset.editId = id;
+
+            // Scroll to form
+            document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
         }
 
         function exportToExcel() {
@@ -739,9 +790,38 @@
             setTimeout(() => n.remove(), 3000);
         }
 
+        function cancelEdit() {
+            const form = document.getElementById('entryForm');
+            form.reset();
+            form.dataset.editId = '';
+            const btn = document.querySelector('.form-btn');
+            const title = document.querySelector('.form-title');
+            const cancelBtn = document.getElementById('cancelBtn');
+            btn.textContent = 'Add Stock';
+            title.textContent = '+ Add Entry';
+            cancelBtn.style.display = 'none';
+            document.getElementById('date').valueAsDate = new Date();
+        }
+
         window.addEventListener('click', (e) => {
             const modal = document.getElementById('setupModal');
             if (e.target === modal) closeSetup();
+        });
+
+        // Add cancel button functionality
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const form = document.getElementById('entryForm');
+                if (form.dataset.editId) {
+                    form.reset();
+                    form.dataset.editId = '';
+                    const btn = document.querySelector('.form-btn');
+                    const title = document.querySelector('.form-title');
+                    btn.textContent = 'Add Stock';
+                    title.textContent = '+ Add Entry';
+                    document.getElementById('date').valueAsDate = new Date();
+                }
+            }
         });
 
         // Register Service Worker
