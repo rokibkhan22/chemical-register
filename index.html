@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#2196F3">
-    <meta name="description" content="Professional app for managing chemical and flavor sample registration with Google Sheets integration">
+    <meta name="description" content="Chemical & Flavor Receiving Register - Professional sample management app">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CRegister">
     <link rel="manifest" href="./manifest.json">
-    <link rel="icon" type="image/png" href="https://private-us-east-1.manuscdn.com/sessionFile/ssTSeemHB6A7f77YEfiROh/sandbox/3k7NYP2ylo13831WOc4aUZ-img-1_1770661744000_na1fn_Y3JlZ2lzdGVyLWxvZ28.png?x-oss-process=image/resize,w_192,h_192/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvc3NUU2VlbUhCNkE3Zjc3WUVmaVJPaC9zYW5kYm94LzNrN05ZUDJ5bG8xMzgzMVdPYzRhVVotaW1nLTFfMTc3MDY2MTc0NDAwMF9uYTFmbl9ZM0psWjJsemRHVnlMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MixoPTE5Mi9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ==&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gcmp6gS0mHM-ybLAO6f1rAjw97~uUy0h0Y-whMIZS6Tzy3X~Ui-n-J-QHguCmBHO3MUP2aLLnTGpRsj3y4wTrJsb-For3fGwj9j~fxJdwovNFiFdRhzIAaoYKWLc-3zXguzAScUkB9TDWjXCZsEI49qIBsyVnNLtDidRu7lXvorF-w92b6ibZqO-78bWK4V~erywQVRSmktaEG0f~IcsgoKL6rGBeTTRB1~YDmIZgcc-oxRvA518F2~y95tFjG6ye5U8yOBgE3mmp2mVCxgrFNi1zfOyG6Y4rmt~Fkve5DTBJOBajQ9X8F9WRdaIagbSVOPCTQ-ytxdkX0IwW1OOtg__">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+    <link rel="apple-touch-icon" href="./icon-192.png">
     <title>Chemical & Flavor Receiving Register</title>
     <style>
         * {
@@ -18,10 +19,17 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: #f5f5f5;
             padding: 20px;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
         }
 
         .status-bar {
@@ -32,6 +40,7 @@
             border-radius: 4px;
             margin-bottom: 20px;
             font-weight: 500;
+            font-size: 14px;
         }
 
         .container {
@@ -39,7 +48,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 8px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
@@ -49,8 +58,8 @@
         }
 
         .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 5px;
             color: #333;
         }
 
@@ -61,26 +70,26 @@
             margin-bottom: 20px;
             border-radius: 4px;
             color: #856404;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .button-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 12px 24px;
+            padding: 10px 16px;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             flex: 1;
-            min-width: 120px;
+            min-width: 100px;
         }
 
         .btn-setup {
@@ -115,49 +124,32 @@
             background: #7B1FA2;
         }
 
-        .badge {
-            display: inline-block;
-            background: #ffc107;
-            color: #333;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 24px;
-            font-weight: bold;
-            font-size: 12px;
-            margin-right: 5px;
-        }
-
         .form-section {
             border: 2px dashed #2196F3;
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
             background: #fafafa;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .form-title {
-            display: flex;
-            align-items: center;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 15px;
             color: #2196F3;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
         }
 
         .form-group {
-            margin-bottom: 15px;
-            position: relative;
+            margin-bottom: 12px;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 14px;
+            margin-bottom: 4px;
+            font-size: 13px;
             color: #333;
         }
 
@@ -165,12 +157,11 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
             font-family: inherit;
-            transition: border-color 0.3s;
         }
 
         .form-group input:focus,
@@ -183,24 +174,17 @@
 
         .form-group textarea {
             resize: vertical;
-            min-height: 60px;
-        }
-
-        .form-badge {
-            position: absolute;
-            top: -10px;
-            right: 10px;
+            min-height: 50px;
         }
 
         .form-btn {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             color: white;
             background: #2196F3;
         }
@@ -212,13 +196,12 @@
         .export-btn {
             background: #795548;
             color: white;
-            padding: 10px 16px;
+            padding: 8px 12px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            margin-bottom: 20px;
-            transition: all 0.3s;
+            font-size: 13px;
         }
 
         .export-btn:hover {
@@ -228,17 +211,17 @@
         .search-export-container {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
 
         .search-export-container input {
             flex: 1;
-            min-width: 250px;
-            padding: 12px;
+            min-width: 200px;
+            padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .table-container {
@@ -251,6 +234,7 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
+            font-size: 13px;
         }
 
         thead {
@@ -259,19 +243,15 @@
         }
 
         th {
-            padding: 15px;
+            padding: 10px;
             text-align: left;
             font-weight: 600;
             color: #333;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         td {
-            padding: 15px;
+            padding: 10px;
             border-bottom: 1px solid #eee;
-            font-size: 14px;
             color: #666;
         }
 
@@ -283,12 +263,11 @@
             background: #ff9800;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 4px 8px;
+            border-radius: 3px;
             cursor: pointer;
-            font-size: 12px;
-            margin-right: 5px;
-            transition: all 0.3s;
+            font-size: 11px;
+            margin-right: 3px;
         }
 
         .action-btn:hover {
@@ -305,8 +284,9 @@
 
         .empty-state {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             color: #999;
+            font-size: 14px;
         }
 
         .modal {
@@ -329,68 +309,48 @@
         .modal-content {
             background: white;
             border-radius: 8px;
-            padding: 30px;
-            max-width: 500px;
+            padding: 20px;
+            max-width: 400px;
             width: 90%;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .modal-close:hover {
-            color: #333;
         }
 
         .modal-header {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #333;
         }
 
         .setup-banner {
             background: #e3f2fd;
             border-left: 4px solid #2196F3;
-            padding: 15px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
             border-radius: 4px;
+            font-size: 12px;
         }
 
         .setup-banner-title {
             font-weight: 600;
             color: #1976D2;
-            margin-bottom: 8px;
-        }
-
-        .setup-banner-text {
-            color: #1565c0;
-            font-size: 13px;
-            margin: 0;
+            margin-bottom: 5px;
         }
 
         .modal-buttons {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .modal-buttons button {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 13px;
         }
 
         .btn-primary {
@@ -415,10 +375,11 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 15px 20px;
+            padding: 12px 16px;
             border-radius: 4px;
             color: white;
             z-index: 2000;
+            font-size: 13px;
             animation: slideIn 0.3s ease-in-out;
         }
 
@@ -448,10 +409,11 @@
 
             .btn {
                 flex: none;
+                width: 100%;
             }
 
-            .search-export-container {
-                flex-direction: column;
+            .container {
+                padding: 15px;
             }
 
             table {
@@ -459,7 +421,7 @@
             }
 
             th, td {
-                padding: 10px;
+                padding: 8px;
             }
         }
     </style>
@@ -469,75 +431,65 @@
 
     <div class="container">
         <div class="header">
-            <h1>🧪 Chemical & Flavor Receiving Register</h1>
+            <h1>🧪 Chemical Register</h1>
         </div>
 
         <div class="info-banner">
-            <strong>ℹ️ Add data</strong> → <strong>Sync</strong> → All devices show same data
+            <strong>ℹ️ Add data → Sync → All devices show same data</strong>
         </div>
 
         <div class="button-group">
-            <button class="btn btn-setup" onclick="showSetup()"><span class="badge">1</span>⚙️ Setup</button>
-            <button class="btn btn-sync" id="syncBtn" onclick="syncData()"><span class="badge">2</span>☁️ Sync</button>
-            <button class="btn btn-reload" onclick="reloadData()"><span class="badge">3</span>🔄 Reload</button>
+            <button class="btn btn-setup" onclick="showSetup()">⚙️ Setup</button>
+            <button class="btn btn-sync" id="syncBtn" onclick="syncData()">☁️ Sync</button>
+            <button class="btn btn-reload" onclick="reloadData()">🔄 Reload</button>
         </div>
 
         <div class="form-section">
-            <div class="form-title">
-                <span class="badge">1</span>+ Add Entry
-            </div>
+            <div class="form-title">+ Add Entry</div>
             <form id="entryForm">
                 <div class="form-group">
-                    <label for="date">Date</label>
+                    <label for="date">Date *</label>
                     <input type="date" id="date" required>
-                    <span class="form-badge badge">1</span>
                 </div>
                 <div class="form-group">
-                    <label for="sample">Sample Name</label>
+                    <label for="sample">Sample Name *</label>
                     <input type="text" id="sample" placeholder="e.g., Natural Flavor" required>
-                    <span class="form-badge badge">2</span>
                 </div>
                 <div class="form-group">
-                    <label for="code">Code</label>
+                    <label for="code">Code *</label>
                     <input type="text" id="code" placeholder="e.g., OGH-15797" required>
-                    <span class="form-badge badge">3</span>
                 </div>
                 <div class="form-group">
-                    <label for="supplier">Supplier</label>
+                    <label for="supplier">Supplier *</label>
                     <input type="text" id="supplier" placeholder="e.g., OGWA" required>
-                    <span class="form-badge badge">4</span>
                 </div>
                 <div class="form-group">
-                    <label for="qty">Quantity</label>
-                    <input type="text" id="qty" placeholder="e.g., 3 bottle, 1000ml" required>
-                    <span class="form-badge badge">5</span>
+                    <label for="qty">Quantity *</label>
+                    <input type="text" id="qty" placeholder="e.g., 500ml" required>
                 </div>
                 <div class="form-group">
-                    <label for="type">Type</label>
+                    <label for="type">Type *</label>
                     <select id="type" required>
                         <option value="">Select Type</option>
                         <option value="Solid">Solid</option>
                         <option value="Liquid">Liquid</option>
                     </select>
-                    <span class="form-badge badge">6</span>
                 </div>
                 <div class="form-group">
-                    <label for="app">Application</label>
+                    <label for="app">Application *</label>
                     <input type="text" id="app" placeholder="e.g., Flavoring" required>
-                    <span class="form-badge badge">7</span>
                 </div>
                 <div class="form-group">
                     <label for="remarks">Remarks</label>
                     <textarea id="remarks" placeholder="Notes..."></textarea>
-                    <span class="form-badge badge">8</span>
                 </div>
                 <button type="submit" class="form-btn">Add Stock</button>
             </form>
         </div>
 
         <div class="search-export-container">
-            <input type="text" id="searchInput" placeholder="Search by Sample Name, Code, or Supplier...">
-            <button class="export-btn" onclick="exportToExcel()">📥 Export Excel</button>
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button class="export-btn" onclick="exportToExcel()">📥 Export</button>
         </div>
 
         <div class="table-container">
@@ -545,12 +497,12 @@
                 <thead>
                     <tr>
                         <th>Date</th>
-                        <th>Sample Name</th>
+                        <th>Sample</th>
                         <th>Code</th>
                         <th>Supplier</th>
                         <th>Qty</th>
                         <th>Type</th>
-                        <th>Application</th>
+                        <th>App</th>
                         <th>Remarks</th>
                         <th>Action</th>
                     </tr>
@@ -566,14 +518,13 @@
 
     <div id="setupModal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeSetup()">×</button>
             <div class="setup-banner">
                 <div class="setup-banner-title">📊 Google Sheets Setup</div>
-                <p class="setup-banner-text">Paste your Google Apps Script URL to enable cloud synchronization</p>
+                <p>Paste your Google Apps Script URL</p>
             </div>
             <div class="form-group">
-                <label for="scriptUrl" style="font-weight: 600; color: #333; margin-bottom: 8px; display: block;">Paste your Google Apps Script URL:</label>
-                <input type="text" id="scriptUrl" placeholder="https://script.google.com/macros/d/..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                <label for="scriptUrl">Google Apps Script URL:</label>
+                <input type="text" id="scriptUrl" placeholder="https://script.google.com/macros/d/...">
             </div>
             <div class="modal-buttons">
                 <button class="btn-primary" onclick="saveScriptUrl()">Save</button>
@@ -585,7 +536,7 @@
     <script>
         let data = JSON.parse(localStorage.getItem('chemicalData')) || [];
 
-        // Set today's date as default
+        // Set today's date
         document.getElementById('date').valueAsDate = new Date();
 
         // Form submission
@@ -613,27 +564,21 @@
             if (scriptUrl) {
                 fetch(scriptUrl, {
                     method: 'POST',
-                    body: JSON.stringify({
-                        action: 'add',
-                        entry: entry
-                    })
-                }).catch(error => console.log('Note: Could not sync to Google Sheets:', error));
+                    body: JSON.stringify({ action: 'add', entry: entry })
+                }).catch(err => console.log('Sync note:', err));
             }
             
             this.reset();
             document.getElementById('date').valueAsDate = new Date();
-            showNotification('Entry added successfully!', 'success');
+            showNotification('Entry added!', 'success');
         });
 
-        // Search functionality
+        // Search
         document.getElementById('searchInput').addEventListener('input', function(e) {
             const query = e.target.value.toLowerCase();
-            const tbody = document.getElementById('tableBody');
-            const rows = tbody.querySelectorAll('tr');
-            
+            const rows = document.querySelectorAll('#tableBody tr');
             rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(query) ? '' : 'none';
+                row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
             });
         });
 
@@ -664,7 +609,7 @@
                     <td>${entry.remarks || '-'}</td>
                     <td>
                         <button class="action-btn" onclick="editEntry(${entry.id})">Edit</button>
-                        <button class="action-btn delete" onclick="deleteEntry(${entry.id})">Delete</button>
+                        <button class="action-btn delete" onclick="deleteEntry(${entry.id})">Del</button>
                     </td>
                 </tr>
             `).join('');
@@ -676,24 +621,20 @@
                 saveData();
                 renderTable();
                 
-                // Delete from Google Sheets
                 const scriptUrl = localStorage.getItem('googleScriptUrl');
                 if (scriptUrl) {
                     fetch(scriptUrl, {
                         method: 'POST',
-                        body: JSON.stringify({
-                            action: 'delete',
-                            id: id
-                        })
-                    }).catch(error => console.log('Note: Could not delete from Google Sheets:', error));
+                        body: JSON.stringify({ action: 'delete', id: id })
+                    }).catch(err => console.log('Sync note:', err));
                 }
                 
-                showNotification('Entry deleted successfully!', 'success');
+                showNotification('Entry deleted!', 'success');
             }
         }
 
         function editEntry(id) {
-            showNotification('Edit functionality coming soon!', 'error');
+            showNotification('Edit coming soon!', 'error');
         }
 
         function exportToExcel() {
@@ -702,7 +643,7 @@
                 return;
             }
 
-            let html = '<table border="1"><tr><th>Date</th><th>Sample Name</th><th>Code</th><th>Supplier</th><th>Qty</th><th>Type</th><th>Application</th><th>Remarks</th></tr>';
+            let html = '<table border="1"><tr><th>Date</th><th>Sample</th><th>Code</th><th>Supplier</th><th>Qty</th><th>Type</th><th>App</th><th>Remarks</th></tr>';
             data.forEach(entry => {
                 html += `<tr><td>${new Date(entry.date).toLocaleDateString()}</td><td>${entry.sample || ''}</td><td>${entry.code}</td><td>${entry.supplier}</td><td>${entry.qty}</td><td>${entry.itemType}</td><td>${entry.app || ''}</td><td>${entry.remarks || ''}</td></tr>`;
             });
@@ -716,7 +657,7 @@
             a.click();
             window.URL.revokeObjectURL(url);
             
-            showNotification('Excel file downloaded!', 'success');
+            showNotification('Excel downloaded!', 'success');
         }
 
         function showSetup() {
@@ -733,66 +674,56 @@
             const url = document.getElementById('scriptUrl').value.trim();
             if (url) {
                 localStorage.setItem('googleScriptUrl', url);
-                showNotification('Google Apps Script URL saved successfully!', 'success');
+                showNotification('URL saved!', 'success');
                 closeSetup();
             } else {
-                showNotification('Please enter a valid URL', 'error');
+                showNotification('Please enter a URL', 'error');
             }
         }
 
         function syncData() {
             const scriptUrl = localStorage.getItem('googleScriptUrl');
             if (!scriptUrl) {
-                showNotification('Please set up Google Apps Script URL first. Click Setup button.', 'error');
+                showNotification('Setup URL first!', 'error');
                 return;
             }
 
             const syncBtn = document.getElementById('syncBtn');
-            const originalText = syncBtn.innerHTML;
-            syncBtn.innerHTML = '⏳ Syncing...';
             syncBtn.disabled = true;
+            syncBtn.textContent = '⏳ Syncing...';
 
             fetch(scriptUrl, {
                 method: 'POST',
-                body: JSON.stringify({
-                    action: 'getAll'
-                })
+                body: JSON.stringify({ action: 'getAll' })
             })
-            .then(response => response.json())
+            .then(r => r.json())
             .then(result => {
                 if (result.success && result.entries) {
-                    data = result.entries.map(entry => ({
-                        id: entry.id,
-                        date: entry.date,
-                        sample: entry.sample,
-                        code: entry.code,
-                        supplier: entry.supplier,
-                        qty: entry.qty,
-                        itemType: entry.itemType,
-                        app: entry.app,
-                        remarks: entry.remarks
+                    data = result.entries.map(e => ({
+                        id: e.id,
+                        date: e.date,
+                        sample: e.sample,
+                        code: e.code,
+                        supplier: e.supplier,
+                        qty: e.qty,
+                        itemType: e.itemType,
+                        app: e.app,
+                        remarks: e.remarks
                     }));
                     saveData();
                     renderTable();
-                    syncBtn.innerHTML = '✓ Synced!';
-                    syncBtn.style.background = '#4CAF50';
-                    showNotification('Data synced from Google Sheets! (' + data.length + ' entries)', 'success');
-                    setTimeout(() => {
-                        syncBtn.innerHTML = originalText;
-                        syncBtn.style.background = '';
-                        syncBtn.disabled = false;
-                    }, 2000);
+                    showNotification('Synced! (' + data.length + ' entries)', 'success');
                 } else {
-                    showNotification('No data found or sync failed', 'error');
-                    syncBtn.innerHTML = originalText;
-                    syncBtn.disabled = false;
+                    showNotification('Sync failed', 'error');
                 }
-            })
-            .catch(error => {
-                console.error('Sync error:', error);
-                showNotification('Sync error: ' + error.message + '. Check URL and try again.', 'error');
-                syncBtn.innerHTML = originalText;
                 syncBtn.disabled = false;
+                syncBtn.textContent = '☁️ Sync';
+            })
+            .catch(err => {
+                console.error(err);
+                showNotification('Sync error: ' + err.message, 'error');
+                syncBtn.disabled = false;
+                syncBtn.textContent = '☁️ Sync';
             });
         }
 
@@ -800,40 +731,25 @@
             location.reload();
         }
 
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
+        function showNotification(msg, type) {
+            const n = document.createElement('div');
+            n.className = `notification ${type}`;
+            n.textContent = msg;
+            document.body.appendChild(n);
+            setTimeout(() => n.remove(), 3000);
         }
 
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', (e) => {
             const modal = document.getElementById('setupModal');
             if (e.target === modal) closeSetup();
         });
 
-        // Register Service Worker for PWA functionality
+        // Register Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./service-worker.js')
-                .then(registration => {
-                    console.log('Service Worker registered:', registration);
-                })
-                .catch(error => {
-                    console.log('Service Worker registration failed:', error);
-                });
+            navigator.serviceWorker.register('./sw.js')
+                .then(r => console.log('SW registered'))
+                .catch(e => console.log('SW error:', e));
         }
-
-        // Handle install prompt for Android
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('Install prompt available');
-        });
 
         renderTable();
     </script>
