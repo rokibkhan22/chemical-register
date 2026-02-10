@@ -627,7 +627,7 @@
             emptyState.style.display = 'none';
             tbody.innerHTML = data.map(entry => `
                 <tr>
-                    <td>${new Date(entry.date).toLocaleDateString()}</td>
+                    <td>${formatDate(entry.date)}</td>
                     <td>${entry.sample || '-'}</td>
                     <td>${entry.code}</td>
                     <td>${entry.supplier}</td>
@@ -696,7 +696,7 @@
 
             let html = '<table border="1"><tr><th>Date</th><th>Sample</th><th>Code</th><th>Supplier</th><th>Qty</th><th>Type</th><th>App</th><th>Remarks</th></tr>';
             data.forEach(entry => {
-                html += `<tr><td>${new Date(entry.date).toLocaleDateString()}</td><td>${entry.sample || ''}</td><td>${entry.code}</td><td>${entry.supplier}</td><td>${entry.qty}</td><td>${entry.itemType}</td><td>${entry.app || ''}</td><td>${entry.remarks || ''}</td></tr>`;
+                html += `<tr><td>${formatDate(entry.date)}</td><td>${entry.sample || ''}</td><td>${entry.code}</td><td>${entry.supplier}</td><td>${entry.qty}</td><td>${entry.itemType}</td><td>${entry.app || ''}</td><td>${entry.remarks || ''}</td></tr>`;
             });
             html += '</table>';
 
@@ -788,6 +788,14 @@
             n.textContent = msg;
             document.body.appendChild(n);
             setTimeout(() => n.remove(), 3000);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
         }
 
         function cancelEdit() {
