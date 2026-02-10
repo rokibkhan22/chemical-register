@@ -497,6 +497,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>S.No</th>
                         <th>Date</th>
                         <th>Sample</th>
                         <th>Code</th>
@@ -625,8 +626,9 @@
             }
 
             emptyState.style.display = 'none';
-            tbody.innerHTML = data.map(entry => `
+            tbody.innerHTML = data.map((entry, index) => `
                 <tr>
+                    <td><strong>${index + 1}</strong></td>
                     <td>${formatDate(entry.date)}</td>
                     <td>${entry.sample || '-'}</td>
                     <td>${entry.code}</td>
@@ -694,9 +696,9 @@
                 return;
             }
 
-            let html = '<table border="1"><tr><th>Date</th><th>Sample</th><th>Code</th><th>Supplier</th><th>Qty</th><th>Type</th><th>App</th><th>Remarks</th></tr>';
-            data.forEach(entry => {
-                html += `<tr><td>${formatDate(entry.date)}</td><td>${entry.sample || ''}</td><td>${entry.code}</td><td>${entry.supplier}</td><td>${entry.qty}</td><td>${entry.itemType}</td><td>${entry.app || ''}</td><td>${entry.remarks || ''}</td></tr>`;
+            let html = '<table border="1"><tr><th>S.No</th><th>Date</th><th>Sample</th><th>Code</th><th>Supplier</th><th>Qty</th><th>Type</th><th>App</th><th>Remarks</th></tr>';
+            data.forEach((entry, index) => {
+                html += `<tr><td>${index + 1}</td><td>${formatDate(entry.date)}</td><td>${entry.sample || ''}</td><td>${entry.code}</td><td>${entry.supplier}</td><td>${entry.qty}</td><td>${entry.itemType}</td><td>${entry.app || ''}</td><td>${entry.remarks || ''}</td></tr>`;
             });
             html += '</table>';
 
